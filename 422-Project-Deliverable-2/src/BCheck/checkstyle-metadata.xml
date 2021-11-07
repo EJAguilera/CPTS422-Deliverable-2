@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE checkstyle-metadata PUBLIC
+"-//eclipse-cs//DTD Check Metadata 1.1//EN"
+"http://eclipse-cs.sourceforge.net/dtds/checkstyle-metadata_1_1.dtd">
+<checkstyle-metadata>
+    <rule-group-metadata name="demo checks"  priority="1600">
+        <description>%MyCustomChecks.desc</description>
+        
+        <rule-metadata name="%BCheck.name" internal-name="BCheck.BCheck" parent="TreeWalker">
+            <alternative-name internal-name="BCheck.BCheck" />
+            <description>%BCheck.desc</description>
+        </rule-metadata>
+    </rule-group-metadata>
+</checkstyle-metadata>
