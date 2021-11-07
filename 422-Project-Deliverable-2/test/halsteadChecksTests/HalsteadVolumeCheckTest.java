@@ -22,8 +22,6 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import com.puppycrawl.tools.checkstyle.*;
 import com.puppycrawl.tools.checkstyle.utils.*;
 
-import ACheck.ACheck;
-
 import org.mockito.Mockito;
 import org.mockito.Mockito.*;
 // import org.mockito.Mockito.
@@ -68,14 +66,27 @@ public class HalsteadVolumeCheckTest {
 	@SuppressWarnings("deprecation")
 	@Test
 	public void getHalsteadVolumeTest() {
-		Assert.assertEquals(0.0, (double)this.check.getHalsteadVolume());
+		DetailAST spy = Mockito.spy(DetailAST.class);
+		Mockito.when(spy.getType()).thenReturn(TokenTypes.ASSIGN);
+		
+		HalsteadVolumeCheck spyCheck = Mockito.spy(HalsteadVolumeCheck.class);
+		spyCheck.visitToken(spy);
+		spyCheck.visitToken(spy);
+		
+		Assertions.assertEquals(0.0, spyCheck.getHalsteadVolume());
 	}
 	
 	// Despite efforts still can't mock ast.
-	@Ignore
 	@Test
 	public void visitTokenTest() {
-		this.check.visitToken(null);
+		DetailAST spy = Mockito.spy(DetailAST.class);
+		Mockito.when(spy.getType()).thenReturn(TokenTypes.CHAR_LITERAL);
+		
+		HalsteadVolumeCheck spyCheck = Mockito.spy(HalsteadVolumeCheck.class);
+		spyCheck.visitToken(spy);
+		spyCheck.visitToken(spy);
+		
+		Mockito.verify(spyCheck, times(2)).visitToken(spy);
 	}
 	
 	// Despite efforts still can't mock log

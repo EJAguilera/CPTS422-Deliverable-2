@@ -49,8 +49,8 @@ public class GetOperandsCheckTest {
 		DetailAST spy = Mockito.spy(DetailAST.class);
 		Mockito.when(spy.getType()).thenReturn(TokenTypes.CHAR_LITERAL);
 		GetOperandsCheck spyCheck = Mockito.spy(GetOperandsCheck.class);
-		spyCheck.visitToken(spy);
-		Mockito.verify(spyCheck, times(1)).visitToken(spy);
+		spyCheck.beginTree(spy);
+		Mockito.verify(spyCheck, times(1)).beginTree(spy);
 	}
 	
 	// Finish Tree skip

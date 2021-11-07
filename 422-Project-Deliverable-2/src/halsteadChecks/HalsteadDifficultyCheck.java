@@ -68,17 +68,17 @@ public class HalsteadDifficultyCheck extends AbstractCheck {
 		Iterator<Integer> operandsItr = this.uniqueOperators.keySet().iterator();
 		
 		// Sets number of unique operators
-		while (operatorsItr.hasNext()) {
+		while (operatorsItr.hasNext() && !(uniqueOperators >= (int)Integer.MAX_VALUE)) {
 			uniqueOperators++;
 		}
 		
 		// Sets number of unique operands
-		while (operandsItr.hasNext()) {
+		while (operandsItr.hasNext() && !(uniqueOperands >= (int)Integer.MAX_VALUE)) {
 			uniqueOperands++;
 		}
 		
 		// Totals number of operands
-		for (Integer value : this.uniqueOperands.values()) {
+		for (int value : this.uniqueOperands.values()) {
 			operands += value;
 		}
 		

@@ -39,6 +39,7 @@ public class HalsteadVocabularyCheckTest {
 	private int[] valid = this.combination(operators, operands);
 	
 	// Tree-Scaler
+	/*
 	private void scaler(HalsteadVocabularyCheck check, DetailAST ast) {
 		while (ast != null) {
 			check.visitToken(ast);
@@ -61,7 +62,7 @@ public class HalsteadVocabularyCheckTest {
 			System.out.print(e.getLocalizedMessage());
 			return null;
 		}
-	}
+	}*/
 	
 	@Test
 	public void getRequiredTokensTest() {
@@ -88,14 +89,14 @@ public class HalsteadVocabularyCheckTest {
 	public void visitTokenTest() {
 		DetailAST spy = Mockito.spy(DetailAST.class);
 		Mockito.when(spy.getType()).thenReturn(TokenTypes.LITERAL_INT);
+		HalsteadVocabularyCheck spyCheck = Mockito.spy(HalsteadVocabularyCheck.class);
 		
 		// Check first conditional
-		this.check.visitToken(spy);
-		// Check second conditional
-		Mockito.when(spy.getType()).thenReturn(TokenTypes.LITERAL_INT);
-		this.check.visitToken(spy);
+		spyCheck.visitToken(spy);
+		spyCheck.visitToken(spy);
 		// Verify function was called
-		Mockito.verify(this.check).visitToken(spy);
+		
+		Mockito.verify(spyCheck, times(2)).visitToken(spy);
 	}
 	
 	// Same as other test, cannot mock the log function successfully

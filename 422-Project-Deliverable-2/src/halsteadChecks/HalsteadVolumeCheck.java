@@ -53,12 +53,12 @@ public class HalsteadVolumeCheck extends AbstractCheck {
 	
 	@Override
 	public void visitToken(DetailAST ast) {
-		if (!this.operatorsOperands.containsKey(ast.getType())) {
+		if (ast != null && !this.operatorsOperands.containsKey(ast.getType())) {
 			// This is the first instance of a unique operator or operand
 			this.operatorsOperands.put(ast.getType(), 1);
 		} else {
 			// This is a repeated instance of a unique operator or operand
-			this.operatorsOperands.put(ast.getType(), this.operatorsOperands.get(ast.getType() + 1));
+			this.operatorsOperands.put(ast.getType(), this.operatorsOperands.get(ast.getType()) + 1);
 		}
 	}
 	
@@ -73,7 +73,7 @@ public class HalsteadVolumeCheck extends AbstractCheck {
 		}
 		
 		double volume = this.sum * (Math.log(uniqueOperatorsOperands) / Math.log(2));
-		return volume;
+		return Math.round(volume);
 	}
 	
 	// Iterates of number of operands and operators as defined in 'https://www.ibm.com/docs/en/raa/6.1?topic=metrics-halstead-effort'

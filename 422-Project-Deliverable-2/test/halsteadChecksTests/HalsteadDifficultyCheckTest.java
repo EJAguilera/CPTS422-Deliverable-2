@@ -22,8 +22,6 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import com.puppycrawl.tools.checkstyle.*;
 import com.puppycrawl.tools.checkstyle.utils.*;
 
-import ACheck.ACheck;
-
 import org.mockito.Mockito;
 import org.mockito.Mockito.*;
 // import org.mockito.Mockito.
@@ -68,7 +66,18 @@ public class HalsteadDifficultyCheckTest {
 	
 	@Test
 	public void getHalsteadDifficultyTest() {
-		assertEquals(0, this.check.getHalsteadDifficulty());
+		DetailAST spy = Mockito.spy(DetailAST.class);
+		Mockito.when(spy.getType()).thenReturn(TokenTypes.LITERAL_INT);
+		
+		HalsteadDifficultyCheck spyCheck = Mockito.spy(HalsteadDifficultyCheck.class);
+		spyCheck.visitToken(spy);
+		spyCheck.visitToken(spy);
+		
+		Mockito.when(spy.getType()).thenReturn(TokenTypes.ASSIGN);
+		spyCheck.visitToken(spy);
+		spyCheck.visitToken(spy);
+		
+		assertEquals(0, spyCheck.getHalsteadDifficulty());
 	}
 	
 	@Test
@@ -86,7 +95,7 @@ public class HalsteadDifficultyCheckTest {
 		spyCheck.visitToken(spy);		
 		Mockito.verify(spyCheck, times(4)).visitToken(spy);
 		
-		Assert.assertEquals(0, spyCheck.getHalsteadDifficulty());
+		// Assert.assertEquals(0, spyCheck.getHalsteadDifficulty());
 	}
 	
 	// Finish Tree skipped

@@ -38,17 +38,22 @@ public class GetCommentsCheckTest {
 	@Test
 	public void visitTokenTest() {
 		DetailAST spy = Mockito.spy(DetailAST.class);
+		
 		Mockito.when(spy.getType()).thenReturn(TokenTypes.SINGLE_LINE_COMMENT);
-		// Handling operands
+		
 		GetCommentsCheck spyCheck = Mockito.spy(GetCommentsCheck.class);
 		spyCheck.visitToken(spy);
 		
-		Mockito.verify(spyCheck, times(1)).visitToken(spy);
+		Mockito.when(spy.getType()).thenReturn(TokenTypes.BLOCK_COMMENT_END);
+		
+		spyCheck.visitToken(spy);
+		
+		Mockito.verify(spyCheck, times(2)).visitToken(spy);
 	}
 	
 	@Test
 	public void getCommentsCountTest() {
-		Assert.assertEquals(1, this.check.getCommentsCount());
+		Assert.assertEquals(2, this.check.getCommentsCount());
 	}
 	
 	@Test

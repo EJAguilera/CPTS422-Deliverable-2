@@ -56,5 +56,10 @@ public class GetOperatorsCheckTest {
 		Mockito.verify(spyCheck, times(1)).visitToken(spy);
 	}
 	
+	@Test
+	public void getOperatorsTest() {
+		Assert.assertEquals(1, this.check.getOperators());
+	}
+	
 	// Finish Tree skipped
 }

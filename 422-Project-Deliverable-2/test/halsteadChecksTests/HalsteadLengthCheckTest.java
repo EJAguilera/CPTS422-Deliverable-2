@@ -22,7 +22,6 @@ import com.puppycrawl.tools.checkstyle.api.TokenTypes;
 import com.puppycrawl.tools.checkstyle.*;
 import com.puppycrawl.tools.checkstyle.utils.*;
 
-import ACheck.ACheck;
 
 import org.mockito.Mockito;
 import org.mockito.Mockito.*;
@@ -105,19 +104,22 @@ public class HalsteadLengthCheckTest {
 	@Ignore
 	@Test
 	public void visitTokenTest() {
-		HalsteadLengthCheck mock = Mockito.mock(HalsteadLengthCheck.class);
-		DetailAST ast = this.getSampleAST();
+		DetailAST spy = Mockito.spy(DetailAST.class);
+		Mockito.when(spy.getType()).thenReturn(TokenTypes.ASSIGN);
+		
+		HalsteadLengthCheck spyCheck = Mockito.spy(HalsteadLengthCheck.class);
+		spyCheck.visitToken(spy);
+		
+		Mockito.verify(spyCheck, times(1)).visitToken(spy);
 	}
 	
 	// Finish tree log function cannot be mocked and verified for unknown reason
 	@Ignore
 	@Test
 	public void finishTreeTest() {
-		HalsteadLengthCheck spy = Mockito.spy(HalsteadLengthCheck.class);
-		// Mockito.verify(spy.log(this.getSampleAST(), String.format("EJA ACHECK: Halstead Length: %s", this.check.getHalsteadLength())), times(1));
-		// Mockito.verify(spy.log(getSamAST(), null, null))
-		// Mockito.when(spy.log(this.getSampleAST(), String.format("EJA ACHECK: Halstead Length: %s", this.check.getHalsteadLength()));
-		// ple
-		// Mockito.when(mock.log(this.getSampleAST(), String.format("EJA ACHECK: Halstead Length: %s", this.check.getHalsteadLength())
+		DetailAST spy = Mockito.spy(DetailAST.class);
+		HalsteadLengthCheck spyCheck = Mockito.spy(HalsteadLengthCheck.class);
+		// spyCheck.finishTree(spy);
+		// Mockito.verify(spyCheck, times(1)).finishTree(spy);
 	}
 }

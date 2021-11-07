@@ -20,7 +20,7 @@ public class GetCommentsCheck extends AbstractCheck {
 		if (ast.getType() == TokenTypes.SINGLE_LINE_COMMENT) {
 			lineCount++;
 		} else if (ast.getType() == TokenTypes.BLOCK_COMMENT_END) {
-			int startLine = ast.getParent().getLineNo(),
+			int startLine = (ast.getParent() != null) ? ast.getParent().getLineNo() : ast.getLineNo(),
 				endLine = ast.getLineNo(),
 				difference = startLine - endLine + 1;
 			lineCount += difference;

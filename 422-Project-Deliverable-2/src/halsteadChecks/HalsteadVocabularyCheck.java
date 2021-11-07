@@ -7,6 +7,8 @@ import Tokens.Operators;
 
 import java.util.*;
 
+import org.junit.Ignore;
+
 public class HalsteadVocabularyCheck extends AbstractCheck {
 	
 	// Contains mappings of unique operands and operators 
@@ -46,10 +48,11 @@ public class HalsteadVocabularyCheck extends AbstractCheck {
 			this.uniqueOperatorsOperands.put(ast.getType(), 1);
 		} else {
 			// This is a repeated instance of a unique operator or operand
-			this.uniqueOperatorsOperands.put(ast.getType(), this.uniqueOperatorsOperands.get(ast.getType() + 1));
+			this.uniqueOperatorsOperands.put(ast.getType(), this.uniqueOperatorsOperands.get(ast.getType()) + 1);
 		}
 	}
 	
+	@Ignore
 	@Override
 	public void finishTree(DetailAST ast) {
 		sumUniqueOperatorOperands = 0;

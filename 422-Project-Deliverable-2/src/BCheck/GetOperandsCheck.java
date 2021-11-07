@@ -1,5 +1,6 @@
 package BCheck;
 
+import Tokens.Operands;
 import Tokens.Operators;
 import com.puppycrawl.tools.checkstyle.api.*;
 
@@ -33,7 +34,7 @@ public class GetOperandsCheck extends AbstractCheck {
 
 	@Override
 	public int[] getRequiredTokens() {
-		return Operators.operators();
+		return Operands.operands();
 	}
 	
 	@Override

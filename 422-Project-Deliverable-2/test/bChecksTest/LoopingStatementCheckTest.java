@@ -1,15 +1,11 @@
 package bChecksTest;
-import static org.mockito.Mockito.times;
-
 import org.junit.*;
+import static org.mockito.Mockito.times;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
-
 import com.puppycrawl.tools.checkstyle.api.DetailAST;
 import com.puppycrawl.tools.checkstyle.api.TokenTypes;
-
 import BCheck.*;
-import halsteadChecks.HalsteadEffortCheck;
 
 public class LoopingStatementCheckTest {
 	
@@ -17,13 +13,12 @@ public class LoopingStatementCheckTest {
 	
 	@Test
 	public void getDefaultTokensTest() {
-		Assert.assertArrayEquals(new int[] {TokenTypes.SLIST}, this.check.getDefaultTokens());
+		Assertions.assertArrayEquals(new int[] {TokenTypes.SLIST}, this.check.getDefaultTokens());
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void getLoopingStatementsTest() {
-		Assert.assertEquals(0, (double)this.check.getLoopingStatements());
+		Assertions.assertEquals(0, (double)this.check.getLoopingStatements());
 	}
 	
 	@Test
